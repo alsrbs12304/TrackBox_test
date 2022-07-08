@@ -20,8 +20,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     @UiThread
     private fun splashAnimation(){
-        val textAnim = AnimationUtils.loadAnimation(this, R.anim.anim_splash_text)
-        binding.splashText.startAnimation(textAnim)
         val imageAnim = AnimationUtils.loadAnimation(this, R.anim.anim_splash_logo)
         binding.splashLogo.startAnimation(imageAnim)
 
