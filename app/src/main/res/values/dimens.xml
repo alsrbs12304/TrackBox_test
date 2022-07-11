@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_sheet_top_margin">160dp</dimen>
+    <dimen name="chip_padding_start">4dp</dimen>
+    <dimen name="swipe_size">128dp</dimen>
+</resources>
