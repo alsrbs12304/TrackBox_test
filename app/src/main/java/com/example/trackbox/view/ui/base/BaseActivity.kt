@@ -1,4 +1,4 @@
-package com.example.trackbox
+package com.example.trackbox.view.ui.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes

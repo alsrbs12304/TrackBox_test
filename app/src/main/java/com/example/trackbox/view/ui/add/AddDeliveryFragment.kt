@@ -1,11 +1,13 @@
-package com.example.trackbox
+package com.example.trackbox.view.ui.add
 
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.trackbox.R
 import com.example.trackbox.databinding.FragmentAddDeliveryBinding
+import com.example.trackbox.view.util.CarrierIdUtil
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 

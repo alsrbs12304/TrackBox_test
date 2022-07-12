@@ -1,4 +1,4 @@
-package com.example.trackbox
+package com.example.trackbox.view.util
 
 class CarrierIdUtil {
 

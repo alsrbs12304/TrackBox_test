@@ -105,6 +105,14 @@
                 app:layout_constraintStart_toStartOf="@id/textView_add_header_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@android:color/background_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

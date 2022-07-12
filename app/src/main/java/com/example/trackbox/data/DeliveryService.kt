@@ -1,5 +1,6 @@
-package com.example.trackbox
+package com.example.trackbox.data
 
+import com.example.trackbox.model.DeliveryResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

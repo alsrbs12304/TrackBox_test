@@ -1,4 +1,4 @@
-package com.example.trackbox
+package com.example.trackbox.model
 
 import com.google.gson.annotations.SerializedName
 

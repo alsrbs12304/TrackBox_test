@@ -1,15 +1,10 @@
-package com.example.trackbox
+package com.example.trackbox.view.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.FragmentManager
+import com.example.trackbox.R
 import com.example.trackbox.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.trackbox.view.ui.add.AddDeliveryFragment
+import com.example.trackbox.view.ui.base.BaseActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
