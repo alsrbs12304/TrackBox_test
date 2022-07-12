@@ -3,6 +3,7 @@ package com.example.trackbox
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.FragmentManager
 import com.example.trackbox.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +17,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         binding.apply {
 
+        }
+        binding.addDeliveryBtn.setOnClickListener {
+            val bottomSheet : AddDeliveryFragment = AddDeliveryFragment()
+            bottomSheet.show(supportFragmentManager, bottomSheet.tag)
         }
     }
 
