@@ -2,26 +2,36 @@ package com.example.trackbox.view.ui.add
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.trackbox.R
+import com.example.trackbox.data.RetrofitClient
 import com.example.trackbox.databinding.FragmentAddDeliveryBinding
+import com.example.trackbox.model.DeliveryResponse
+import com.example.trackbox.view.ui.base.BaseBottomSheetDialogFragment
 import com.example.trackbox.view.util.CarrierIdUtil
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class AddDeliveryFragment : BottomSheetDialogFragment() {
-    private var _binding : FragmentAddDeliveryBinding? = null
-    private val binding get() = _binding!!
+class AddDeliveryFragment :
+    BaseBottomSheetDialogFragment<FragmentAddDeliveryBinding>(R.layout.fragment_add_delivery) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentAddDeliveryBinding.inflate(inflater, container, false)
-        return binding.root
+    private var carrierId: String? = null
+    private var trackId: String? = null
+
+    private val viewModel: AddDeliveryViewModel by lazy {
+        ViewModelProvider(
+            this,
+            AddDeliveryViewModel.Factory(mainActivity.application)
+        )[AddDeliveryViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,6 +41,30 @@ class AddDeliveryFragment : BottomSheetDialogFragment() {
         binding.imageButtonAddCancel.setOnClickListener {
             dismiss()
         }
+
+        binding.chipGroupAddCarrierName.setOnCheckedChangeListener { group, checkedId ->
+            carrierId = CarrierIdUtil.convertId(group.findViewById<Chip>(checkedId).text.toString())
+        }
+
+        binding.buttonAddLookUp.setOnClickListener {
+            trackId = binding.editTextTrackId.text.toString()
+
+            RetrofitClient.service.getData(carrierId, trackId).enqueue(object : Callback<DeliveryResponse> {
+                    override fun onResponse(call: Call<DeliveryResponse>, response: Response<DeliveryResponse>) {
+                        if (response.isSuccessful) {
+                            Log.d("AddDeliveryFragment", "onResponse 성공")
+                            val result : DeliveryResponse? = response.body()
+                            Log.d("MainActivity", "onResponse 성공: " + result?.toString());
+                        }else{
+                            Log.d("AddDeliveryFragment", "onResponse 실패")
+                        }
+                    }
+                    override fun onFailure(call: Call<DeliveryResponse>, t: Throwable) {
+                        Log.d("AddDeliveryFragment", "onFailure 에러: " + t.message.toString());
+                    }
+                })
+        }
+
     }
 
     private fun setChipGroup(binding: FragmentAddDeliveryBinding) {
@@ -47,10 +81,10 @@ class AddDeliveryFragment : BottomSheetDialogFragment() {
                 }
             )
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.chipGroupAddCarrierName.setOnCheckedChangeListener { group, checkedId ->
+            group.findViewById<Chip>(checkedId)?.let {
+                viewModel.carrierName.postValue(it.text.toString())
+            } ?: viewModel.carrierName.postValue(null)
+        }
     }
 }
