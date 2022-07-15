@@ -4,6 +4,9 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 32
 
@@ -15,6 +18,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_URL", properties['api_url']
     }
 
     buildTypes {
@@ -54,4 +59,6 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:2.4.2")
     annotationProcessor("androidx.room:room-compiler:2.4.2")
+
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 }
