@@ -13,6 +13,7 @@ import com.example.trackbox.R
 import com.example.trackbox.data.RetrofitClient
 import com.example.trackbox.databinding.FragmentAddDeliveryBinding
 import com.example.trackbox.model.DeliveryResponse
+import com.example.trackbox.model.entity.Delivery
 import com.example.trackbox.view.ui.base.BaseBottomSheetDialogFragment
 import com.example.trackbox.view.util.CarrierIdUtil
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -49,16 +50,19 @@ class AddDeliveryFragment :
         binding.buttonAddLookUp.setOnClickListener {
             trackId = binding.editTextTrackId.text.toString()
 
-            RetrofitClient.service.getData(carrierId, trackId).enqueue(object : Callback<DeliveryResponse> {
-                    override fun onResponse(call: Call<DeliveryResponse>, response: Response<DeliveryResponse>) {
-                        if (response.isSuccessful) {
-                            Log.d("AddDeliveryFragment", "onResponse 성공")
-                            val result : DeliveryResponse? = response.body()
-                            Log.d("MainActivity", "onResponse 성공: " + result?.toString());
-                        }else{
-                            Log.d("AddDeliveryFragment", "onResponse 실패")
-                        }
+            RetrofitClient.service.getData(carrierId, trackId)
+                .enqueue(object : Callback<DeliveryResponse> {
+                    override fun onResponse(
+                        call: Call<DeliveryResponse>,
+                        response: Response<DeliveryResponse>
+                    ) {
+                        val result: DeliveryResponse? = response.body()
+                        Log.d("MainActivity", "onResponse 성공: " + result?.toString());
+                        val testResult : Delivery? = result?.toDelivery(result.carrier.id?.toLong(), result.carrier.name.toString(),result.carrier.id.toString())
+                        Log.d("MainActivity", testResult.toString())
+                        viewModel.insert(testResult!!)
                     }
+
                     override fun onFailure(call: Call<DeliveryResponse>, t: Throwable) {
                         Log.d("AddDeliveryFragment", "onFailure 에러: " + t.message.toString());
                     }

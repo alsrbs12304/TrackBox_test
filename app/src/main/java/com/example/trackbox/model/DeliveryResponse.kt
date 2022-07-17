@@ -40,6 +40,7 @@ data class DeliveryResponse(
     )
 
     data class Carrier(
+        val id: String?,
         val name: String?
     )
 

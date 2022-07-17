@@ -111,6 +111,7 @@
                 app:layout_constraintEnd_toEndOf="@id/imageButton_add_cancel"
                 app:layout_constraintStart_toStartOf="@id/textView_add_header_title" />
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
         <ProgressBar
             android:layout_width="wrap_content"

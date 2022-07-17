@@ -1,4 +1,4 @@
-package com.example.trackbox
+package com.example.trackbox.data.room
 
 import androidx.room.Database
 import androidx.room.Room
@@ -8,9 +8,12 @@ import android.content.Context
 
 @Database(entities = [Delivery::class], version = 1, exportSchema = false)
 abstract class DeliveryDatabase : RoomDatabase() {
+
     abstract fun deliveryDao() : DeliveryDao
 
     companion object {
+
+        @Volatile
         private var instance: DeliveryDatabase? = null
 
         @Synchronized
@@ -20,7 +23,7 @@ abstract class DeliveryDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         DeliveryDatabase::class.java,
-                        "delivery-database"
+                        "delivery_database"
                     ).build()
                 }
             }
