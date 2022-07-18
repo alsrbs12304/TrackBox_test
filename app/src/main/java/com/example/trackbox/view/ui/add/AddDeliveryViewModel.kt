@@ -14,20 +14,21 @@ class AddDeliveryViewModel(private val repository: DeliveryRepository) : BaseVie
 
     val carrierName = MutableLiveData<String>()
 
-
-    fun onClickInsertButton(){
+    fun onClickInsertButton() {
 
     }
 
-    fun insert(delivery: Delivery){
-        viewModelScope.launch(Dispatchers.IO){
+    fun insert(delivery: Delivery) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.insert(delivery)
         }
     }
 
-    class Factory(private val application : Application) : ViewModelProvider.Factory { // factory pattern
+    class Factory(private val application: Application) :
+        ViewModelProvider.Factory { // factory pattern
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return AddDeliveryViewModel(DeliveryRepository.getInstance(application)!!) as T
-            }
         }
     }
+
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable
+            name="delivery"
+            type="com.example.trackbox.model.entity.Delivery" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout_foreground"
+                app:layout_constraintEnd_toStartOf="@+id/img_vox"
+                app:layout_constraintTop_toTopOf="@id/constraintLayout_foreground"
+                app:layout_constraintBottom_toBottomOf="@id/constraintLayout_foreground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{delivery.status}"
+                    android:textSize="35sp"
+                    android:fontFamily="@font/scdream5"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{delivery.carrierName}"
+                    android:fontFamily="@font/scdream3"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{delivery.trackId}"
+                    android:fontFamily="@font/scdream3"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_vox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/boxes"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

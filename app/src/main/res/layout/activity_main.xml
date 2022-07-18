@@ -12,8 +12,8 @@
             android:id="@+id/recyclerView_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layoutAnimation="@anim/anim_item_main"
-            android:background="@color/whiteMarine"/>
+            android:background="@color/whiteMarine"
+            android:padding="10dp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_delivery_btn"
